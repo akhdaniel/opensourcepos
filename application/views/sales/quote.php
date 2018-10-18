@@ -95,7 +95,7 @@ if (isset($error_message))
 				<td><textarea rows="5" cols="6"><?php echo $transaction_date; ?></textarea></td>
 			</tr>
 			<tr>
-				<td class="meta-head"><?php echo $this->lang->line('sales_amount_due'); ?></td>
+				<td class="meta-head"><?php echo $this->lang->line('sales_invoice_total'); ?></td>
 				<td><textarea rows="5" cols="6"><?php echo to_currency($total); ?></textarea></td>
 			</tr>
 		</table>
@@ -146,14 +146,11 @@ if (isset($error_message))
 					</td>
 				</tr>
 
-				<?php if($item['is_serialized'] || $item['allow_alt_description'] && !empty($item['description']))
+				<?php if($item['is_serialized'])
 				{
 				?>
 					<tr class="item-row">
-						<td></td>
-						<td class="item-name" colspan="<?php echo $quote_columns-2; ?>">
-							<div><?php echo $item['description']; ?></div>
-						</td>
+						<td class="item-name" colspan="<?php echo $quote_columns-1; ?>"></td>
 						<td style='text-align:center;'><textarea><?php echo $item['serialnumber']; ?></textarea></td>
 					</tr>
 				<?php
@@ -173,13 +170,13 @@ if (isset($error_message))
 		</tr>
 
 		<?php
-		foreach($taxes as $tax_group_index=>$sales_tax)
+		foreach($taxes as $tax_group_index=>$tax)
 		{
 		?>
 			<tr>
 				<td colspan="<?php echo $quote_columns-3; ?>" class="blank"> </td>
-				<td colspan="2" class="total-line"><textarea rows="5" cols="6"><?php echo $sales_tax['tax_group']; ?></textarea></td>
-				<td class="total-value"><textarea rows="5" cols="6" id="taxes"><?php echo to_currency_tax($sales_tax['sale_tax_amount']); ?></textarea></td>
+				<td colspan="2" class="total-line"><textarea rows="5" cols="6"><?php echo $tax['tax_group']; ?></textarea></td>
+				<td class="total-value"><textarea rows="5" cols="6" id="taxes"><?php echo to_currency_tax($tax['sale_tax_amount']); ?></textarea></td>
 			</tr>
 		<?php
 		}
